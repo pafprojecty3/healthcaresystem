@@ -102,5 +102,39 @@ public class Hospital {
 	}
 	return output;
 	}
+	
+	
+	
+	public String updateDoctorShedule(String hospitalID, String hospitalCode, String doctorName, String roomNo, String timeFrom, String timeTo, String date)
+	{
+	String output = "";
+	try
+	{
+	Connection con = connect();
+	if (con == null)
+	{return "Error while connecting to the database for updating."; }
+	// create a prepared statement
+	String query = "UPDATE hospital SET hospitalCode=?,doctorName=?,roomNo=?,timeFrom=?,timeTo=?,date=? WHERE hospitalID=?";
+	PreparedStatement preparedStmt = con.prepareStatement(query);
+	// binding values
+	preparedStmt.setString(1, hospitalCode);
+	preparedStmt.setString(2, doctorName);
+	preparedStmt.setString(3, roomNo);
+	preparedStmt.setString(4, timeFrom);
+	preparedStmt.setString(5, timeTo);
+	preparedStmt.setString(6, date);
+	preparedStmt.setInt(7, Integer.parseInt(hospitalID));
+	// execute the statement
+	preparedStmt.execute();
+	con.close();
+	output = "Updated successfully";
+	}
+	catch (Exception e)
+	{
+	output = "Error while updating the item.";
+	System.err.println(e.getMessage());
+	}
+	return output;
+	}
 
 }
