@@ -1,19 +1,16 @@
 package com.healthCareManagementSystem.controller;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.FormParam;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
 
-//For JSON
-//For XML
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import com.healthCareManagementSystem.model.Hospital;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+//For JSON
+import com.google.gson.*;
+//For XML
+import org.jsoup.*;
+import org.jsoup.parser.*;
+import org.jsoup.nodes.Document;
+
 
 
 @Path("/Hospital")
@@ -44,7 +41,7 @@ public class HospitalService {
 	@Path("/")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
-	public String updateDoctorShedule(String itemData)
+	public String updateShedule(String itemData)
 	{
 	//Convert the input string to a JSON object
 	JsonObject itemObject = new JsonParser().parse(itemData).getAsJsonObject();
