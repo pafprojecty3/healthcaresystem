@@ -9,13 +9,13 @@
 
 		<init-param>
 			<param-name>jersey.config.server.provider.packages</param-name>
-			<param-value>com.newExample</param-value>
+			<param-value>com.healthCareManagementSystemDoctor.controller</param-value>
 		</init-param>
 
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>Jersey Web Application</servlet-name>
-		<url-pattern>/Demo/*</url-pattern>
+		<url-pattern>/DoctorService/*</url-pattern>
 
 	</servlet-mapping>
   <welcome-file-list>
