@@ -17,7 +17,7 @@ public class DoctorService {
 	Doctor doctorObj = new Doctor();
 
 	@GET
-	@Path("/")
+	@Path("d")
 	@Produces(MediaType.TEXT_HTML)
 	public String readItems() {
 	
