@@ -19,7 +19,7 @@ public class DoctorService {
 	@GET
 	@Path("d")
 	@Produces(MediaType.TEXT_HTML)
-	public String readItems() {
+	public String readDoctors() {
 	
 		return doctorObj.readDoctors();
 	}
@@ -55,7 +55,7 @@ public class DoctorService {
 	@Path("/")
 	@Consumes(MediaType.APPLICATION_XML)
 	@Produces(MediaType.TEXT_PLAIN)
-	public String deleteItem(String doctorData) {
+	public String deleteDoctor(String doctorData) {
 		// Convert the input string to an XML document
 		Document doc = Jsoup.parse(doctorData, "", Parser.xmlParser());
 
