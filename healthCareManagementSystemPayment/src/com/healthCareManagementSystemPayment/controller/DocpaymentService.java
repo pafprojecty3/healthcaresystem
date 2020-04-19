@@ -64,7 +64,7 @@ public class DocpaymentService {
 			//convert the input string to an XML document
 			Document doc = Jsoup.parse(docpaymentData,"",Parser.xmlParser());
 			
-			//Read the value from the element <adminID>
+			//Read the value from the element <PaymetID>
 			String PaymetID = doc.select("PaymetID").text();
 			
 			String output = docpaymentObj.deletedocpayment(PaymetID);

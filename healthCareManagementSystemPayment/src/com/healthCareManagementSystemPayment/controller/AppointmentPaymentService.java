@@ -77,7 +77,7 @@ public class AppointmentPaymentService{
 			//convert the input string to an XML document
 			Document doc = Jsoup.parse(AppointmentPaymentData,"",Parser.xmlParser());
 			
-			//Read the value from the element <adminID>
+			//Read the value from the element <AppointentNo>
 			String AppointentNo = doc.select("AppointentNo").text();
 			
 			String output = AppointmentPaymentObj.deletedocpayment(AppointentNo);

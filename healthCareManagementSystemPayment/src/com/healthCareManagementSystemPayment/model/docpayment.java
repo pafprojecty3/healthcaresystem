@@ -13,7 +13,7 @@ public class docpayment {
 		try
 		{
 		Class.forName("com.mysql.jdbc.Driver");
-		//Provide the correct details: DBServer/DBName, username, password
+		//Provide the correct details
 		con = (Connection) DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/healthcaremanagment", "root", "");
 		}
 		catch (Exception e)
@@ -62,7 +62,7 @@ public class docpayment {
 		if (con == null)
 		{return "Error while connecting to the database for reading."; }
 		// Prepare the html table to be displayed
-		output = "<table border=\"1\"><tr><th>Paymentcode</th><th>DocID</th><th>DocName</th><th>PaymentType</th><th>Amount</th><th>DateOfPayed</th><th>Update</th><th>Remove</th></tr>";
+		output = "<table border=\"1\"><tr><th>Paymentcode</th><th>DocID</th><th>DocName</th><th>PaymentType</th><th>Amount</th><th>DateOfPayed</th>";
 		String query = "select * from docpayment";
 					java.sql.Statement stmt = con.createStatement();
 		ResultSet rs = stmt.executeQuery(query);
@@ -84,7 +84,7 @@ public class docpayment {
 		output += "<td>" + Amount + "</td>";
 		output += "<td>" + DateOfPayed + "</td>";
 		// buttons
-		output += "<td><input name=\"btnUpdate\" type=\"button\"value=\"Update\" class=\"btn btn-secondary\"></td>"+ "<td><form method=\"post\" action=\"Docpayment.jsp\">"+ "<input name=\"btnRemove\" type=\"submit\" value=\"Remove\"class=\"btn btn-danger\">"+ "<input name=\"PaymentID\" type=\"hidden\" value=\"" + PaymentID + "\">" + "</form></td></tr>";
+		//output += "<td><input name=\"btnUpdate\" type=\"button\"value=\"Update\" class=\"btn btn-secondary\"></td>"+ "<td><form method=\"post\" action=\"Docpayment.jsp\">"+ "<input name=\"btnRemove\" type=\"submit\" value=\"Remove\"class=\"btn btn-danger\">"+ "<input name=\"PaymentID\" type=\"hidden\" value=\"" + PaymentID + "\">" + "</form></td></tr>";
 		}
 		con.close();
 		// Complete the html table
@@ -118,12 +118,7 @@ public class docpayment {
 		preparedStmt.setString(5, PaymentType);
 		preparedStmt.setFloat(6, Float.parseFloat(Amount));
 		preparedStmt.setString(7, DateOfPayed);
-		//preparedStmt.setString(1, code);
-		//preparedStmt.setString(2, name);
-		//preparedStmt.setDouble(3, Double.parseDouble(price));
-		//preparedStmt.setString(4, desc);
-		//preparedStmt.setInt(5, Integer.parseInt(ID));
-		// execute the statement
+		
 		preparedStmt.execute();
 		con.close();
 		output = "Updated successfully";
@@ -174,8 +169,7 @@ public class docpayment {
 		String query = " insert into appointentpayment(AppointentNo,PatientNIC,PatientName,TellNo,HospitalName,DoctorName,Date,DoctorCharges,HospitalCharges,FullPayment)"
 		+ " values (?, ?, ?, ?, ? ,? ,? ,? ,? ,?)";
 		PreparedStatement preparedStmt = con.prepareStatement(query);
-		// binding values
-		//preparedStmt.setInt(1, 0);
+		
 		preparedStmt.setString(1, AppointentNo);
 		preparedStmt.setString(2, PatientNIC);
 		preparedStmt.setString(3, PatientName);
@@ -209,7 +203,7 @@ public class docpayment {
 		if (con == null)
 		{return "Error while connecting to the database for reading."; }
 		// Prepare the html table to be displayed
-		output = "<table border=\"1\"><tr><th>AppointentNo</th><th>PatientNIC</th><th>PatientName</th><th>TellNo</th><th>HospitalName</th><th>DoctorName</th><th>Date</th><th>DoctorCharges</th><th>HospitalCharges</th><th>FullPayment</th><th>Update</th><th>Remove</th></tr>";
+		output = "<table border=\"1\"><tr><th>AppointentNo</th><th>PatientNIC</th><th>PatientName</th><th>TellNo</th><th>HospitalName</th><th>DoctorName</th><th>Date</th><th>DoctorCharges</th><th>HospitalCharges</th><th>FullPayment</th>";
 		String query = "select * from appointentpayment";
 					java.sql.Statement stmt = con.createStatement();
 		ResultSet rs = stmt.executeQuery(query);
@@ -240,7 +234,7 @@ public class docpayment {
 		output += "<td>" + HospitalCharges + "</td>";
 		output += "<td>" + FullPayment + "</td>";
 		// buttons
-		output += "<td><input name=\"btnUpdate\" type=\"button\"value=\"Update\" class=\"btn btn-secondary\"></td>"+ "<td><form method=\"post\" action=\"Docpayment.jsp\">"+ "<input name=\"btnRemove\" type=\"submit\" value=\"Remove\"class=\"btn btn-danger\">"+ "<input name=\"AppointentNo\" type=\"hidden\" value=\"" + AppointentNo + "\">" + "</form></td></tr>";
+		//output += "<td><input name=\"btnUpdate\" type=\"button\"value=\"Update\" class=\"btn btn-secondary\"></td>"+ "<td><form method=\"post\" action=\"Docpayment.jsp\">"+ "<input name=\"btnRemove\" type=\"submit\" value=\"Remove\"class=\"btn btn-danger\">"+ "<input name=\"AppointentNo\" type=\"hidden\" value=\"" + AppointentNo + "\">" + "</form></td></tr>";
 		}
 		con.close();
 		// Complete the html table
@@ -280,11 +274,7 @@ public class docpayment {
 		preparedStmt.setFloat(9, Float.parseFloat(HospitalCharges));
 		preparedStmt.setFloat(10, Float.parseFloat(FullPayment));
 
-		//preparedStmt.setString(1, code);
-		//preparedStmt.setString(2, name);
-		//preparedStmt.setDouble(3, Double.parseDouble(price));
-		//preparedStmt.setString(4, desc);
-		//preparedStmt.setInt(5, Integer.parseInt(ID));
+		
 		// execute the statement
 		preparedStmt.execute();
 		con.close();
