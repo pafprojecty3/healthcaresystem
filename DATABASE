@@ -1,0 +1,225 @@
+-- phpMyAdmin SQL Dump
+-- version 4.8.0
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Apr 19, 2020 at 07:27 PM
+-- Server version: 10.1.31-MariaDB
+-- PHP Version: 7.2.4
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `healthcaremanagment`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin`
+--
+
+CREATE TABLE `admin` (
+  `adminID` int(50) NOT NULL,
+  `adminUsername` varchar(50) NOT NULL,
+  `adminPassword` varchar(50) NOT NULL,
+  `adminReports` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`adminID`, `adminUsername`, `adminPassword`, `adminReports`) VALUES
+(1, 'kollue', 'kollure', ''),
+(2, 'chaveen', 'chaveen', ''),
+(3, 'harin', 'harin', ''),
+(4, 'samaratunga', 'samaratunga', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `appointentpayment`
+--
+
+CREATE TABLE `appointentpayment` (
+  `AppointentID` int(20) NOT NULL,
+  `AppointentNo` varchar(20) NOT NULL,
+  `PatientNIC` varchar(20) NOT NULL,
+  `PatientName` varchar(20) NOT NULL,
+  `TellNo` int(20) NOT NULL,
+  `HospitalName` varchar(20) NOT NULL,
+  `DoctorName` varchar(20) NOT NULL,
+  `Date` varchar(20) NOT NULL,
+  `DoctorCharges` double NOT NULL,
+  `HospitalCharges` float NOT NULL,
+  `FullPayment` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `appointentpayment`
+--
+
+INSERT INTO `appointentpayment` (`AppointentID`, `AppointentNo`, `PatientNIC`, `PatientName`, `TellNo`, `HospitalName`, `DoctorName`, `Date`, `DoctorCharges`, `HospitalCharges`, `FullPayment`) VALUES
+(1, 'A01', '123344V', 'Kamal', 2219191, 'Nawaloka', 'Silva.W.K.S', '2020/12/01', 2000, 1000, 3000);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `docpayment`
+--
+
+CREATE TABLE `docpayment` (
+  `PaymentID` varchar(20) NOT NULL,
+  `Paymentcode` varchar(20) NOT NULL,
+  `DocID` varchar(20) NOT NULL,
+  `DocName` varchar(20) NOT NULL,
+  `PaymentType` varchar(20) NOT NULL,
+  `Amount` varchar(20) NOT NULL,
+  `DateOfPayed` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `docpayment`
+--
+
+INSERT INTO `docpayment` (`PaymentID`, `Paymentcode`, `DocID`, `DocName`, `PaymentType`, `Amount`, `DateOfPayed`) VALUES
+('1', 'P01', 'D01', 'S.L.Perera', 'C', '12000', '2020');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `doctors`
+--
+
+CREATE TABLE `doctors` (
+  `doctorID` int(10) NOT NULL,
+  `doctorCode` varchar(10) NOT NULL,
+  `doctorName` varchar(20) NOT NULL,
+  `doctorCharge` double NOT NULL,
+  `doctorDesc` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `doctors`
+--
+
+INSERT INTO `doctors` (`doctorID`, `doctorCode`, `doctorName`, `doctorCharge`, `doctorDesc`) VALUES
+(12, 'D02', 'kamal ranasinghe', 1200, 'skin speci'),
+(13, 'DOC3', 'Athula', 200, 'specialist');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hospital`
+--
+
+CREATE TABLE `hospital` (
+  `sheduleID` int(10) NOT NULL,
+  `hospitalCode` varchar(20) NOT NULL,
+  `doctorName` varchar(30) NOT NULL,
+  `roomNo` varchar(12) NOT NULL,
+  `timeFrom` varchar(10) NOT NULL,
+  `timeTo` varchar(10) NOT NULL,
+  `date` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `hospital`
+--
+
+INSERT INTO `hospital` (`sheduleID`, `hospitalCode`, `doctorName`, `roomNo`, `timeFrom`, `timeTo`, `date`) VALUES
+(1, 'DOC3', 'Athula', '20', '5.00pm', '6.00pm', 'tuesday');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hospitalreg`
+--
+
+CREATE TABLE `hospitalreg` (
+  `hospitalID` int(11) NOT NULL,
+  `hospitalCode` varchar(10) NOT NULL,
+  `hospitalName` varchar(40) NOT NULL,
+  `address` varchar(60) NOT NULL,
+  `phoneNo` varchar(10) NOT NULL,
+  `email` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `hospitalreg`
+--
+
+INSERT INTO `hospitalreg` (`hospitalID`, `hospitalCode`, `hospitalName`, `address`, `phoneNo`, `email`) VALUES
+(1, 'AC001', 'apolo', 'colombo', '0115463724', 'apolo@gmail.com '),
+(2, 'gdsv', 'vfdsv', 'vfdsv', '432', 'vdsvfdsv');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `appointentpayment`
+--
+ALTER TABLE `appointentpayment`
+  ADD PRIMARY KEY (`AppointentID`);
+
+--
+-- Indexes for table `doctors`
+--
+ALTER TABLE `doctors`
+  ADD PRIMARY KEY (`doctorID`);
+
+--
+-- Indexes for table `hospital`
+--
+ALTER TABLE `hospital`
+  ADD PRIMARY KEY (`sheduleID`);
+
+--
+-- Indexes for table `hospitalreg`
+--
+ALTER TABLE `hospitalreg`
+  ADD PRIMARY KEY (`hospitalID`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `appointentpayment`
+--
+ALTER TABLE `appointentpayment`
+  MODIFY `AppointentID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `doctors`
+--
+ALTER TABLE `doctors`
+  MODIFY `doctorID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `hospital`
+--
+ALTER TABLE `hospital`
+  MODIFY `sheduleID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `hospitalreg`
+--
+ALTER TABLE `hospitalreg`
+  MODIFY `hospitalID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
