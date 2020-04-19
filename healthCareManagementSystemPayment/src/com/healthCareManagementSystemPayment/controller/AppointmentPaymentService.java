@@ -51,6 +51,7 @@ public class AppointmentPaymentService{
 	//Convert the input string to a JSON object
 	JsonObject AppointmentPaymentObject = new JsonParser().parse(AppointmentPaymentData).getAsJsonObject();
 	//Read the values from the JSON object
+	String AppointentID = AppointmentPaymentObject.get("AppointentID").getAsString();
 	String AppointentNo = AppointmentPaymentObject.get("AppointentNo").getAsString();
 	String PatientNIC = AppointmentPaymentObject.get("PatientNIC").getAsString();
 	String PatientName = AppointmentPaymentObject.get("PatientName").getAsString();
@@ -61,7 +62,7 @@ public class AppointmentPaymentService{
 	String DoctorCharges = AppointmentPaymentObject.get("DoctorCharges").getAsString();
 	String HospitalCharges = AppointmentPaymentObject.get("HospitalCharges").getAsString();
 	String FullPayment = AppointmentPaymentObject.get("FullPayment").getAsString();
-	String output = AppointmentPaymentObj.updateAppointmentPayment(AppointentNo, PatientNIC, PatientName, TellNo, HospitalName, DoctorName, Date, DoctorCharges, HospitalCharges, FullPayment);
+	String output = AppointmentPaymentObj.updateAppointmentPayment(AppointentID,AppointentNo, PatientNIC, PatientName, TellNo, HospitalName, DoctorName, Date, DoctorCharges, HospitalCharges, FullPayment);
 	return output;
 	}
 	
@@ -77,10 +78,10 @@ public class AppointmentPaymentService{
 			//convert the input string to an XML document
 			Document doc = Jsoup.parse(AppointmentPaymentData,"",Parser.xmlParser());
 			
-			//Read the value from the element <AppointentNo>
-			String AppointentNo = doc.select("AppointentNo").text();
+			//Read the value from the element <AppointentID>
+			String AppointentID = doc.select("AppointentID").text();
 			
-			String output = AppointmentPaymentObj.deletedocpayment(AppointentNo);
+			String output = AppointmentPaymentObj.deletedocpayment(AppointentID);
 			
 			return output;
 	}

@@ -166,7 +166,7 @@ public class docpayment {
 		if (con == null)
 		{return "Error while connecting to the database for inserting."; }
 		// create a prepared statement
-		String query = " insert into appointentpayment(AppointentNo,PatientNIC,PatientName,TellNo,HospitalName,DoctorName,Date,DoctorCharges,HospitalCharges,FullPayment)"
+		String query = " insert into appointentpaymentt(AppointentID,AppointentNo,PatientNIC,PatientName,TellNo,HospitalName,DoctorName,Date,DoctorCharges,HospitalCharges,FullPayment)"
 		+ " values (?, ?, ?, ?, ? ,? ,? ,? ,? ,?)";
 		PreparedStatement preparedStmt = con.prepareStatement(query);
 		
@@ -204,13 +204,13 @@ public class docpayment {
 		{return "Error while connecting to the database for reading."; }
 		// Prepare the html table to be displayed
 		output = "<table border=\"1\"><tr><th>AppointentNo</th><th>PatientNIC</th><th>PatientName</th><th>TellNo</th><th>HospitalName</th><th>DoctorName</th><th>Date</th><th>DoctorCharges</th><th>HospitalCharges</th><th>FullPayment</th>";
-		String query = "select * from appointentpayment";
+		String query = "select * from appointentpaymentt";
 					java.sql.Statement stmt = con.createStatement();
 		ResultSet rs = stmt.executeQuery(query);
 		// iterate through the rows in the result set
 		while (rs.next())
 		{
-		//String PaymentID = Integer.toString(rs.getInt("PaymentID"));
+		String AppointentID = Integer.toString(rs.getInt("AppointentID"));
 		String AppointentNo = rs.getString("AppointentNo");
 		String PatientNIC = rs.getString("PatientNIC");
 		String PatientName = rs.getString("PatientName");
@@ -234,7 +234,7 @@ public class docpayment {
 		output += "<td>" + HospitalCharges + "</td>";
 		output += "<td>" + FullPayment + "</td>";
 		// buttons
-		//output += "<td><input name=\"btnUpdate\" type=\"button\"value=\"Update\" class=\"btn btn-secondary\"></td>"+ "<td><form method=\"post\" action=\"Docpayment.jsp\">"+ "<input name=\"btnRemove\" type=\"submit\" value=\"Remove\"class=\"btn btn-danger\">"+ "<input name=\"AppointentNo\" type=\"hidden\" value=\"" + AppointentNo + "\">" + "</form></td></tr>";
+		//output += "<td><input name=\"btnUpdate\" type=\"button\"value=\"Update\" class=\"btn btn-secondary\"></td>"+ "<td><form method=\"post\" action=\"Docpayment.jsp\">"+ "<input name=\"btnRemove\" type=\"submit\" value=\"Remove\"class=\"btn btn-danger\">"+ "<input name=\"AppointentID\" type=\"hidden\" value=\"" + AppointentID + "\">" + "</form></td></tr>";
 		}
 		con.close();
 		// Complete the html table
@@ -250,7 +250,7 @@ public class docpayment {
 		
 		
 		
-		public String updateAppointmentPayment(String AppointentNo, String PatientNIC, String PatientName, String TellNo, String HospitalName, String DoctorName, String Date, String DoctorCharges, String HospitalCharges, String FullPayment )
+		public String updateAppointmentPayment(String AppointentID,String AppointentNo, String PatientNIC, String PatientName, String TellNo, String HospitalName, String DoctorName, String Date, String DoctorCharges, String HospitalCharges, String FullPayment )
 		{
 		String output = "";
 		try
@@ -259,7 +259,7 @@ public class docpayment {
 		if (con == null)
 		{return "Error while connecting to the database for updating."; }
 		// create a prepared statement
-		String query = "UPDATE appointentpayment SET AppointentNo=?,PatientNIC=?,PatientName=?,TellNo=?,HospitalName=?,DoctorName=?,Date=?,DoctorCharges=?,HospitalCharges=?,FullPayment=?,WHERE AppointentNo=?";
+		String query = "UPDATE appointentpaymentt SET AppointentNo=?,PatientNIC=?,PatientName=?,TellNo=?,HospitalName=?,DoctorName=?,Date=?,DoctorCharges=?,HospitalCharges=?,FullPayment=?,WHERE AppointentID=?";
 		PreparedStatement preparedStmt = con.prepareStatement(query);
 		// binding values
 		
@@ -273,7 +273,7 @@ public class docpayment {
 		preparedStmt.setFloat(8, Float.parseFloat(DoctorCharges));
 		preparedStmt.setFloat(9, Float.parseFloat(HospitalCharges));
 		preparedStmt.setFloat(10, Float.parseFloat(FullPayment));
-
+        preparedStmt.setInt(7, Integer.parseInt(AppointentID));
 		
 		// execute the statement
 		preparedStmt.execute();
@@ -290,7 +290,7 @@ public class docpayment {
 		
 		
 		
-		public String deleteAppointmentPayment(String AppointentNo)
+		public String deleteAppointmentPayment(String AppointentID)
 		{
 		String output = "";
 		try
@@ -299,10 +299,10 @@ public class docpayment {
 		if (con == null)
 		{return "Error while connecting to the database for deleting."; }
 		// create a prepared statement
-		String query = "delete from appointentpayment where AppointentNo=?";
+		String query = "delete from appointentpaymentt where AppointentNo=?";
 		PreparedStatement preparedStmt = con.prepareStatement(query);
 		// binding values
-		preparedStmt.setInt(1, Integer.parseInt(AppointentNo));
+		preparedStmt.setInt(1, Integer.parseInt(AppointentID));
 		// execute the statement
 		preparedStmt.execute();
 		con.close();
